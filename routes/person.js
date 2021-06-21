@@ -14,7 +14,7 @@ router.get("/", ( req, res ) =>{
         } );
 } );
 
-// get : baseUrl/person/search?q=query => [name, address]
+// get : baseUrl/person/search?q=<query> => name/address/age
 router.get("/search", ( req, res ) =>{
     fsPromises.readFile( "./db/person.json" )
         .then( (result)=>{
@@ -68,7 +68,7 @@ router.post("/", async( req, res ) =>{
     fsPromises.readFile( "./db/person.json" )
         .then( (result)=>{
             resultJson = JSON.parse( result );
-            const _personJson = _person.toJson( )
+            const _personJson = _person.toJson( );
             resultJson.push( _personJson );
 
             fsPromises.writeFile(  "./db/person.json", JSON.stringify( resultJson ) )
