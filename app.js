@@ -3,7 +3,7 @@ const personRouter = require("./routes/person")
 const app = express()
 const port = 3000
 
-
+//  require('crypto').randomBytes(64).toString('hex');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -21,16 +21,13 @@ app.use(function (req, res, next) {
 // adding routes
 app.use( "/person", personRouter );
 
+// handling error
 app.all('*', (req, res) => {
     res.status(404).send("Not Found");
 });
-
-
-// handling error
 app.use( function(err, req, res, next){
     res.status(500).send( err.message );
 } );
-
 
 app.listen( port, ()=>{
     console.log( "running server on port " + port );
