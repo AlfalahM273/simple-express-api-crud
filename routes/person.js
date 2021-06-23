@@ -35,28 +35,14 @@ router.get("/:id", ( req, res ) => {
     } );
 } );
 
-router.post("/", async( req, res ) =>{
-    var _person = new Person();
-    _person.fromJSON( req.body );
-    _person.prepareData();
-
-    fsPromises.readFile( "./db/person.json" )
-        .then( (result)=>{
-            resultJson = JSON.parse( result );
-            const _personJson = _person.toJson( );
-            resultJson.push( _personJson );
-
-            fsPromises.writeFile(  "./db/person.json", JSON.stringify( resultJson ) )
-            .then( ()=>{
-                res.send( _personJson );
-            } )
-            .catch( (err)=>{
-                res.send( err );
-            } );
-        } )
-        .catch( (err)=>{
-            res.send( err );
-        } );
+router.post("/", async( req, res ) => {
+    personController.createPerson( req.body )
+    .then( resultJson =>{
+        res.send( resultJson );
+    })
+    .catch( (err)=>{
+        res.status(404).send( err.message );
+    });
 } );
 
 router.delete("/:id", async( req, res ) =>{

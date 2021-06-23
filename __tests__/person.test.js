@@ -89,5 +89,4 @@ describe('Person Controller functionality test', () => {
             expect( result.age ).toBe( 0 );
         } );
     });
-
 })
