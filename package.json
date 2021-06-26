@@ -28,7 +28,7 @@
     "verbose": true,
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "<rootDir>/controller/**/*.js"
+      "<rootDir>/handler/**/*.js"
     ]
   }
 }

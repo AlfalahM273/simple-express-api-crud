@@ -1,16 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const personHandler = require('../../handler/person');
+const personHandler = require('../handler/person');
+const personController = require('../controller/person');
 
-router.get("/", ( req, res ) =>{
-    personHandler.getAll()
-    .then( resultJson =>{
-        res.send( resultJson );
-    } )
-    .catch( (err)=>{
-        res.send( err );
-    } );
-} );
+router.get("/", personController.index );
 
 // get : baseUrl/person/search?q=<query> => name/address/age
 router.get("/search", ( req, res ) =>{
@@ -23,15 +16,7 @@ router.get("/search", ( req, res ) =>{
     } );
 } );
 
-router.get("/:id", ( req, res ) => {
-    personHandler.findById( req.params.id )
-    .then( resultJson =>{
-        res.send( resultJson );
-    } )
-    .catch( (err)=>{
-        res.status(404).send( err.message );
-    } );
-} );
+router.get("/:id", personController.findById );
 
 router.post("/", async( req, res ) => {
     personHandler.createPerson( req.body )

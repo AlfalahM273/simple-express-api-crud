@@ -1,16 +1,18 @@
-const fsPromises = require('fs/promises');
+const fsPromises = require('fs').promises;
 const { Person } = require('../model/person');
 
+const DB_PATH = "./src/db/person.json";
+
 const getAll = async (  ) => {
-    return fsPromises.readFile( "./db/person.json" )
+    return fsPromises.readFile( DB_PATH )
         .then( (result)=>{
             resultJson = JSON.parse( result );
             return resultJson;
-        } )
+        });
 }
 
 const searchByQuery = async ( query = "" ) => {
-    return fsPromises.readFile( "./db/person.json" )
+    return fsPromises.readFile(DB_PATH)
     .then( (result)=>{
         resultJson = JSON.parse( result );
         var pattern = "";
@@ -34,16 +36,17 @@ const findById = async ( personId ) =>{
     personId = Number(personId);
     if (!personId) throw new Error('personId must bee number!');
 
-    return fsPromises.readFile( "./db/person.json" )
+    return fsPromises.readFile( DB_PATH )
         .then( (result)=>{
             resultJson = JSON.parse( result );
-            var filtered = resultJson.filter( e => e.id == personId  );
+            let filtered = resultJson.filter( e => e.id == personId  );
             if( filtered.length > 0 )
-                filtered = filtered[0];
-            return filtered
+                return filtered[0];
+            else 
+                throw new Error('Person Not Found');
         } )
         .catch( (err)=>{
-            return err
+            throw err
         } );
 }
 
@@ -52,13 +55,13 @@ const createPerson = async (data) => {
     person.fromJSON( data );
     person.prepareData();
 
-    return fsPromises.readFile( "./db/person.json" )
+    return fsPromises.readFile( DB_PATH )
         .then( (result)=>{
             resultJson = JSON.parse( result );
             const personJson = person.toJson( );
             resultJson.push( personJson );
 
-            return fsPromises.writeFile(  "./db/person.json", JSON.stringify( resultJson ) )
+            return fsPromises.writeFile(  DB_PATH, JSON.stringify( resultJson ) )
             .then( ()=>{
                 return personJson
             } )
@@ -71,9 +74,32 @@ const createPerson = async (data) => {
         } );
 }
 
+const deletePerson = (personId) => {
+    return fsPromises.readFile( DB_PATH )
+        .then( (result)=>{
+            resultJson = JSON.parse(result);
+            var filtered = resultJson.filter( e => e.id != personId  );
+            // if different then id found
+            if( filtered.length != resultJson.length ){
+                return fsPromises.writeFile(  DB_PATH, JSON.stringify( filtered ) )
+                .then( ()=>{
+                    return { message : "deleted"};
+                } )
+                .catch( (err)=>{
+                    return err;
+                } );
+            }else{
+                return { message : "Not Found"};
+            }
+        } )
+        .catch( (err)=>{
+            return err;
+        } );
+}
 module.exports = {
     getAll,
     searchByQuery,
     findById,
-    createPerson
+    createPerson,
+    deletePerson
 };
