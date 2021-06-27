@@ -28,7 +28,10 @@
     "verbose": true,
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "<rootDir>/handler/**/*.js"
+      "<rootDir>/src/handler/**/*.js",
+      "<rootDir>/src/controller/**/*.js",
+      "<rootDir>/src/helper/**/*.js",
+      "<rootDir>/src/model/**/*.js"
     ]
   }
 }

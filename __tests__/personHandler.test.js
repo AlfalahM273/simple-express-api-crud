@@ -40,26 +40,19 @@ describe('Person Get Data', () => {
     // Negative
     test('find by id where id is not set', async () => {
         await expect( personHandler.findById() ).rejects.toEqual(Error('personId not set'));
-        // return personHandler.findById()
-        //         .catch(e => {
-        //             expect(e.message).toBe('personId not set');
-        //         });
     });
     // Negative
     test('find by id where id contains string', async () => {
         await expect( personHandler.findById("1sdf") ).rejects.toEqual(Error('personId must bee number!'));
-        // return personHandler.findById("1sdf")
-        //         .catch(e => {
-        //             expect(e.message).toMatch('personId must bee number!');
-        //         });
     });
     // Positive
-    test('find by id where id is set and its not found return empty object', () => {
-        return personHandler.findById( "99" )
-        .then( result => {
-            expect( Array.isArray(result) ).toBeTruthy();
-            expect( result.name ).toBeUndefined();
-        } );
+    test('find by id where id is set and its not found return empty object', async () => {
+        await expect( personHandler.findById("99") ).rejects.toEqual(Error('Person Not Found'));
+        // return personHandler.findById( "99" )
+        // .then( result => {
+        //     expect( Array.isArray(result) ).toBeTruthy();
+        //     expect( result.name ).toBeUndefined();
+        // } );
     });
     // Positive
     test('find by id where id is set and its found return object', () => {
@@ -77,9 +70,9 @@ describe('Person Create Data', () => {
     // Positive
     test('create person return json of current data with new id', () => {
         const data =  {
-            "name" : "name",
-            "age" : 0,
-            "address" : "address",
+            name : "name",
+            age : 1,
+            address : "address",
         };
 
         return personHandler.createPerson( data )
@@ -88,12 +81,17 @@ describe('Person Create Data', () => {
             expect( result.id ).toBeDefined();
             expect( result.name ).toBe( "name" );
             expect( result.address ).toBe( "address" );
-            expect( result.age ).toBe( 0 );
+            expect( result.age ).toBe( 1 );
         } );
     });
 });
 
-describe('Person Delete Data', () => {
+describe('Person Delete Data',  () => {
+    // Positive
+    test.only('Delete person data based on its Id. Id not found', async () => {
+        const personId = 99;
+        await expect( personHandler.deletePerson(personId) ).rejects.toEqual(Error('Person Not Found'));
+    });
     // Positive
     test.skip('Delete person data based on its Id. If found, return message delete', () => {
         const personId = 5;

@@ -3,7 +3,6 @@ const personRouter = require("./src/routes/person")
 const app = express()
 const port = 3000
 
-//  require('crypto').randomBytes(64).toString('hex');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -25,6 +24,7 @@ app.use( "/person", personRouter );
 app.all('*', (req, res) => {
     res.status(404).send("Not Found");
 });
+
 app.use( function(err, req, res, next){
     res.status(500).send( err.message );
 } );

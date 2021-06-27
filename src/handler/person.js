@@ -1,5 +1,9 @@
 const fsPromises = require('fs').promises;
 const { Person } = require('../model/person');
+const {
+    NotFoundError,
+    ValidationError
+} = require('../helper/error');
 
 const DB_PATH = "./src/db/person.json";
 
@@ -32,9 +36,9 @@ const searchByQuery = async ( query = "" ) => {
 }
 
 const findById = async ( personId ) =>{
-    if (!personId) throw new Error('personId not set');
+    if (!personId) throw new ValidationError('personId not set');
     personId = Number(personId);
-    if (!personId) throw new Error('personId must bee number!');
+    if (!personId) throw new ValidationError('personId must bee number!');
 
     return fsPromises.readFile( DB_PATH )
         .then( (result)=>{
@@ -43,7 +47,7 @@ const findById = async ( personId ) =>{
             if( filtered.length > 0 )
                 return filtered[0];
             else 
-                throw new Error('Person Not Found');
+                throw new NotFoundError('Person Not Found');
         } )
         .catch( (err)=>{
             throw err
@@ -51,6 +55,10 @@ const findById = async ( personId ) =>{
 }
 
 const createPerson = async (data) => {
+    let { name, age, address } = data
+    if( !( name && address && age ) )
+        throw new ValidationError('All field Required');
+
     let person = new Person();
     person.fromJSON( data );
     person.prepareData();
@@ -70,11 +78,11 @@ const createPerson = async (data) => {
             } );
         } )
         .catch( (err)=>{
-            return err
+            throw err
         } );
 }
 
-const deletePerson = (personId) => {
+const deletePerson = async (personId) => {
     return fsPromises.readFile( DB_PATH )
         .then( (result)=>{
             resultJson = JSON.parse(result);
@@ -86,14 +94,14 @@ const deletePerson = (personId) => {
                     return { message : "deleted"};
                 } )
                 .catch( (err)=>{
-                    return err;
+                    throw err;
                 } );
             }else{
-                return { message : "Not Found"};
+                throw new NotFoundError('Person Not Found');
             }
         } )
         .catch( (err)=>{
-            return err;
+            throw err;
         } );
 }
 module.exports = {
