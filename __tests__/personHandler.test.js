@@ -55,8 +55,8 @@ describe('Person Get Data', () => {
         // } );
     });
     // Positive
-    test('find by id where id is set and its found return object', () => {
-        return personHandler.findById( "1" )
+    test('find by id where id is set and its found return object', async () => {
+        return personHandler.findById( "4" )
         .then( result => {
             expect( typeof result === 'object' ).toBeTruthy();
             expect( result.name ).toBeDefined();
@@ -66,6 +66,7 @@ describe('Person Get Data', () => {
     });
 })
 
+let ID = 0
 describe('Person Create Data', () => {
     // Positive
     test('create person return json of current data with new id', () => {
@@ -77,6 +78,7 @@ describe('Person Create Data', () => {
 
         return personHandler.createPerson( data )
         .then( result => {
+            ID = result.id;
             expect( typeof result === 'object' ).toBeTruthy();
             expect( result.id ).toBeDefined();
             expect( result.name ).toBe( "name" );
@@ -88,13 +90,13 @@ describe('Person Create Data', () => {
 
 describe('Person Delete Data',  () => {
     // Positive
-    test.only('Delete person data based on its Id. Id not found', async () => {
-        const personId = 99;
+    test('Delete person data based on its Id. Id not found', async () => {
+        const personId = -1;
         await expect( personHandler.deletePerson(personId) ).rejects.toEqual(Error('Person Not Found'));
     });
     // Positive
-    test.skip('Delete person data based on its Id. If found, return message delete', () => {
-        const personId = 5;
+    test('Delete person data based on its Id. If found, return message delete', () => {
+        const personId = ID;
         return personHandler.deletePerson( personId )
         .then( result => {
             expect( typeof result === 'object' ).toBeTruthy();

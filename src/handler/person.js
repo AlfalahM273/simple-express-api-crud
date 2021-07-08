@@ -104,6 +104,7 @@ const deletePerson = async (personId) => {
             throw err;
         } );
 }
+
 module.exports = {
     getAll,
     searchByQuery,

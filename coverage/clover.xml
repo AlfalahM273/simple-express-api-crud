@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1624764719261" clover="3.2.0">
-  <project timestamp="1624764719261" name="All files">
+<coverage generated="1625715724254" clover="3.2.0">
+  <project timestamp="1625715724254" name="All files">
     <metrics statements="106" coveredstatements="95" conditionals="25" coveredconditionals="19" methods="42" coveredmethods="35" elements="173" coveredelements="149" complexity="0" loc="106" ncloc="106" packages="4" files="4" classes="4"/>
     <package name="controller">
       <metrics statements="30" coveredstatements="24" conditionals="6" coveredconditionals="3" methods="15" coveredmethods="12"/>
-      <file name="person.js" path="/media/madukubah/Hetfield/MITRAIS/TRAINING/PROJECT/simple-express-api-crud/src/controller/person.js">
+      <file name="person.js" path="D:\Training\WEEK 3\simple-express-api-crud\src\controller\person.js">
         <metrics statements="30" coveredstatements="24" conditionals="6" coveredconditionals="3" methods="15" coveredmethods="12"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -40,7 +40,7 @@
     </package>
     <package name="handler">
       <metrics statements="56" coveredstatements="51" conditionals="19" coveredconditionals="16" methods="21" coveredmethods="17"/>
-      <file name="person.js" path="/media/madukubah/Hetfield/MITRAIS/TRAINING/PROJECT/simple-express-api-crud/src/handler/person.js">
+      <file name="person.js" path="D:\Training\WEEK 3\simple-express-api-crud\src\handler\person.js">
         <metrics statements="56" coveredstatements="51" conditionals="19" coveredconditionals="16" methods="21" coveredmethods="17"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -59,7 +59,7 @@
         <line num="25" count="3" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
-        <line num="30" count="19" type="cond" truecount="3" falsecount="0"/>
+        <line num="30" count="28" type="cond" truecount="3" falsecount="0"/>
         <line num="34" count="1" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
         <line num="39" count="4" type="cond" truecount="2" falsecount="0"/>
@@ -67,7 +67,7 @@
         <line num="41" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="43" count="2" type="stmt"/>
         <line num="45" count="2" type="stmt"/>
-        <line num="46" count="38" type="stmt"/>
+        <line num="46" count="56" type="stmt"/>
         <line num="47" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="48" count="1" type="stmt"/>
         <line num="50" count="1" type="stmt"/>
@@ -90,19 +90,19 @@
         <line num="85" count="1" type="stmt"/>
         <line num="86" count="1" type="stmt"/>
         <line num="88" count="1" type="stmt"/>
-        <line num="89" count="20" type="stmt"/>
+        <line num="89" count="29" type="stmt"/>
         <line num="91" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="92" count="0" type="stmt"/>
         <line num="94" count="0" type="stmt"/>
         <line num="97" count="0" type="stmt"/>
         <line num="100" count="1" type="stmt"/>
         <line num="104" count="1" type="stmt"/>
-        <line num="107" count="1" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
       </file>
     </package>
     <package name="helper">
       <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-      <file name="error.js" path="/media/madukubah/Hetfield/MITRAIS/TRAINING/PROJECT/simple-express-api-crud/src/helper/error.js">
+      <file name="error.js" path="D:\Training\WEEK 3\simple-express-api-crud\src\helper\error.js">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="4" count="5" type="stmt"/>
         <line num="5" count="5" type="stmt"/>
@@ -115,7 +115,7 @@
     </package>
     <package name="model">
       <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-      <file name="person.js" path="/media/madukubah/Hetfield/MITRAIS/TRAINING/PROJECT/simple-express-api-crud/src/model/person.js">
+      <file name="person.js" path="D:\Training\WEEK 3\simple-express-api-crud\src\model\person.js">
         <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
